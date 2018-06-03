@@ -33,26 +33,4 @@ class Task extends Model
             'completed',
         ];
     }
-
-    public static function listColumns($currentOrder, $currentDirection)
-    {
-        return array_map(function ($item) use ($currentOrder, $currentDirection) {
-            list($attribute, $title) = $item;
-            if ($currentOrder !== $attribute) {
-                $dir = DB::ORDER_ASC;
-                $icon = 'fa-sort';
-            } else {
-                $dir = $currentDirection === DB::ORDER_ASC ? DB::ORDER_DESC : DB::ORDER_ASC;
-                $icon = $currentDirection === DB::ORDER_DESC ? 'fa-sort-down' : 'fa-sort-up';
-            }
-
-            return [
-                'attribute' => $attribute,
-                'title' => $title,
-                'direction' => $dir,
-                'icon' => $icon
-            ];
-
-        }, [['user_name', 'Имя пользователя'], ['email', 'Email'], ['completed', 'Статус']]);
-    }
 }
