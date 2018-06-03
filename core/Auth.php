@@ -20,7 +20,7 @@ class Auth
         return self::$instance;
     }
 
-    public function tryLogin($login, $password)
+    public function tryLogin($login, $password): bool
     {
         if (
             App::config('auth.login') === $login &&
@@ -38,7 +38,7 @@ class Auth
         Session::instance()->remove('is_admin');
     }
 
-    public static function isAdmin()
+    public static function isAdmin(): bool
     {
         return Session::instance()->get('is_admin');
     }

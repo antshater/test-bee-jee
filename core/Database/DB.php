@@ -6,6 +6,7 @@ namespace Core\Database;
 use Core\App;
 use Core\Exceptions\SqlException;
 use PDO;
+use PDOStatement;
 
 class DB
 {
@@ -16,7 +17,7 @@ class DB
 
     private $pdo;
 
-    private function __construct($config)
+    private function __construct(array $config)
     {
         $this->pdo = new PDO($config['dsn'], $config['user'], $config['password']);
     }
@@ -30,7 +31,7 @@ class DB
         return self::$instance;
     }
 
-    public function queryRaw($sql, $params = [])
+    public function queryRaw(string $sql, array $params = []): PDOStatement
     {
         $statement = $this->pdo->prepare($sql);
         $statement->execute($params);
@@ -42,7 +43,7 @@ class DB
         return $statement;
     }
 
-    public function update($table, $update_attributes, $condition_attributes)
+    public function update(string $table, array $update_attributes, array $condition_attributes): PDOStatement
     {
         $updates = [];
         foreach ($update_attributes as $attribute => $value) {
@@ -61,10 +62,10 @@ class DB
 
         $sql = "UPDATE $table SET " . implode(',', $updates) . " WHERE " . implode(' AND ', $conditions);
 
-        $this->queryRaw($sql, $params);
+        return $this->queryRaw($sql, $params);
     }
 
-    public function insert($table, $attributes)
+    public function insert(string $table, array $attributes): int
     {
         $attribute_names = array_keys($attributes);
         $values = array_values($attributes);
@@ -75,8 +76,15 @@ class DB
         return $this->pdo->lastInsertId();
     }
 
-    public function select($table, $fields = '*', $conditions = null, $limit = null, $offset = null, $order = null, $orderDirection = null)
-    {
+    public function select(
+        $table,
+        $fields = null,
+        $conditions = null,
+        $limit = null,
+        $offset = null,
+        $order = null,
+        $orderDirection = null
+    ): array {
         $fields = $fields ? implode(',', $fields) : '*';
 
         $sql = "SELECT $fields FROM $table ";

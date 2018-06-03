@@ -14,7 +14,7 @@ class ListViewColumn
     private $isOrderColumn;
     private $sortable;
 
-    public function __construct($attribute, $title, $currentDirection, $currentOrder, $sortable)
+    public function __construct(string $attribute, string $title, ?string $currentDirection, ?string $currentOrder, ?bool $sortable)
     {
         $this->attribute = $attribute;
         $this->title = $title;
@@ -23,7 +23,7 @@ class ListViewColumn
         $this->sortable = $sortable;
     }
 
-    private function byState($defaultValue, $ascValue, $descValue)
+    private function byState($defaultValue, $ascValue, $descValue): string
     {
         if (! $this->isOrderColumn) {
             return $defaultValue;
@@ -32,17 +32,17 @@ class ListViewColumn
         return $this->currentDirection === DB::ORDER_ASC ? $ascValue : $descValue;
     }
 
-    private function direction()
+    private function direction(): string
     {
         return $this->byState(DB::ORDER_ASC, DB::ORDER_DESC, DB::ORDER_ASC);
     }
 
-    private function icon()
+    private function icon(): string
     {
         return $this->byState('fa-sort','fa-sort-up', 'fa-sort-down');
     }
 
-    public function render()
+    public function render(): string
     {
         if (! $this->sortable) {
             return $this->title;

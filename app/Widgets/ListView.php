@@ -18,7 +18,7 @@ class ListView
     private $page;
     private $itemsCount;
 
-    public function __construct($modelClass, $columns, Request $request)
+    public function __construct(string $modelClass, array $columns, Request $request)
     {
         $this->modelClass = $modelClass;
         $this->request = $request;
@@ -33,12 +33,12 @@ class ListView
         $this->itemsCount = $modelClass::count();
     }
 
-    public function items()
+    public function items(): array
     {
         return $this->items;
     }
 
-    public function columns()
+    public function columns(): array
     {
         return array_map(function ($item) {
             list($attribute, $title, $sortable) = $item;
@@ -49,7 +49,7 @@ class ListView
         }, $this->columns);
     }
 
-    public function pagination()
+    public function pagination(): array
     {
         return array_map(function ($page_num) {
             return [
@@ -59,17 +59,17 @@ class ListView
         }, range(1, $this->pageCount()));
     }
 
-    private function itemsOnPage()
+    private function itemsOnPage(): int
     {
         return App::config('items-on-page');
     }
 
-    private function pageCount()
+    private function pageCount(): int
     {
         return ceil($this->itemsCount / $this->itemsOnPage());
     }
 
-    private function offset()
+    private function offset(): int
     {
         return ($this->page - 1) * $this->itemsOnPage();
     }

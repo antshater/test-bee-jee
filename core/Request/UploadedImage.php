@@ -3,6 +3,7 @@
 
 namespace Core\Request;
 
+use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 
 class UploadedImage extends UploadedFile
@@ -16,7 +17,7 @@ class UploadedImage extends UploadedFile
         $this->image = $manager->make($this->tmpName());
     }
 
-    public function image()
+    public function image(): Image
     {
         return $this->image;
     }

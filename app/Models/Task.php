@@ -3,7 +3,6 @@
 
 namespace App\Models;
 
-use Core\Database\DB;
 use Core\Database\Model;
 
 /**

@@ -5,7 +5,7 @@ namespace Core\Helpers;
 
 class Html
 {
-    public static function a($link, $label, $params = [], $attributes = [], $overrideParams = false)
+    public static function a(string $link, string $label, $params = [], $attributes = [], $overrideParams = false)
     {
         $currentParams = $_GET;
         $params = $overrideParams ? $params : array_merge($currentParams, $params);

@@ -24,7 +24,7 @@ class Router
         $this->request = $request;
     }
 
-    private function controllerString()
+    private function controllerString(): ?string
     {
         $controller_string = $this->config[$this->request->routePath()] ?? null;
         return $controller_string ?: null;

@@ -21,17 +21,17 @@ abstract class Model
         }
     }
 
-    public function exists()
+    public function exists(): bool
     {
         return $this->attributes[$this->primaryKey] !== null;
     }
 
-    public function save()
+    public function save(): Model
     {
         return $this->exists() ? $this->update() : $this->create();
     }
 
-    public static function getList($limit, $offset, $order, $orderDirection)
+    public static function getList($limit, $offset, $order, $orderDirection): array
     {
         $data = DB::instance()->select(
             (new static())->table(),
@@ -48,19 +48,19 @@ abstract class Model
         }, $data);
     }
 
-    public static function find($id)
+    public static function find($id): ?Model
     {
         $data = DB::instance()->select((new static())->table(), null, compact('id'));
         return isset($data[0]) ? new static($data[0]) : null;
     }
 
-    public static function count()
+    public static function count(): int
     {
         $data = DB::instance()->select((new static())->table(), ['COUNT(*) as count']);
         return (int)$data[0]['count'];
     }
 
-    private function getAttributes()
+    private function getAttributes(): array
     {
         $attributes = [];
         foreach ($this->attributes() as $attribute) {
@@ -70,13 +70,13 @@ abstract class Model
         return $attributes;
     }
 
-    private function update()
+    private function update(): Model
     {
         DB::instance()->update($this->table(), $this->getAttributes(), [$this->primaryKey => $this->{$this->primaryKey}]);
         return $this;
     }
 
-    private function create()
+    private function create(): Model
     {
         $primary = DB::instance()->insert($this->table(), $this->getAttributes());
         $this->attributes[$this->primaryKey] = $primary;
