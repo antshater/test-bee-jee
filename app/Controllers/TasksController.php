@@ -44,9 +44,9 @@ class TasksController extends Controller
             $task = new Task($form);
             if ($file = $this->request->image('file')) {
                 $image = $this->prepareImage($file);
-                $file_url = '/files/' . $file->md5() . '.' . $file->extension();
-                $image->save(App::publicPath($file_url));
-                $task->image = $file_url;
+                $file_url = $file->md5() . '.' . $file->extension();
+                $image->save(App::filePath($file_url));
+                $task->image = '/assets/files/' . $file_url;
             }
 
             $task->save();

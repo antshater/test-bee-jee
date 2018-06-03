@@ -17,9 +17,9 @@ class App
         return realpath(__DIR__ . '/../app') . ($path ? "/$path" : '');
     }
 
-    public static function publicPath($path = ''): string
+    public static function filePath($path = ''): string
     {
-        return realpath(__DIR__ . '/../public') . ($path ? "/$path" : '');
+        return realpath(__DIR__ . '/../assets/files') . ($path ? "/$path" : '');
     }
 
     public static function config($path = null)
@@ -43,7 +43,7 @@ class App
     public static function jsBlock(): string
     {
         return implode("\n", array_map(function ($fileName) {
-            return "<script src='$fileName'></script>";
+            return "<script src='/assets/js/$fileName'></script>";
         }, self::$jsFiles));
     }
 

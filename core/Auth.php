@@ -40,6 +40,6 @@ class Auth
 
     public static function isAdmin(): bool
     {
-        return Session::instance()->get('is_admin');
+        return (bool) Session::instance()->get('is_admin');
     }
 }

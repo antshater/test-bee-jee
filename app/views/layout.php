@@ -20,7 +20,7 @@
             integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
             crossorigin="anonymous"
     >
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
 <nav class="navbar navbar-light bg-light">

@@ -1,4 +1,4 @@
-<? \Core\App::registerJs('/js/create-task.js') ?>
+<? \Core\App::registerJs('create-task.js') ?>
 <? /** @var $task \App\Models\Task */ ?>
 <!--Задача существует только в случае если ее просматривает админ-->
 <h1><?= $task->exists() ? 'Задача #' . $task->id : 'Новая задача' ?></h1>
