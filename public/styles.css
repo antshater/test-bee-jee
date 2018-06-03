@@ -1,0 +1,15 @@
+h1 {
+    padding: 20px 0;
+}
+
+.tasks-table th a {
+    color: #000;
+}
+
+#edit-form.edit-mode .preview {
+    display: none;
+}
+
+#edit-form.preview-mode .form-control, #edit-form.preview-mode .form-control-file {
+    display: none;
+}

@@ -1,0 +1,8 @@
+CREATE TABLE tasks (
+  id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  description TEXT,
+  user_name VARCHAR(200) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  image VARCHAR(200),
+  completed INTEGER DEFAULT 0
+);

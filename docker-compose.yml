@@ -1,0 +1,22 @@
+version: "2"
+services:
+  php:
+    build: docker/php
+    volumes:
+      - .:/var/www/html
+  nginx:
+    build: docker/nginx
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "80:80"
+  mysql:
+    image: mysql:5.7
+    ports:
+       - "6605:3306"
+    environment:
+       MYSQL_DATABASE: "test_bee_jee_vitaliy"
+       MYSQL_USER: "test_bee_jee_vitaliy"
+       MYSQL_PASSWORD: "test_bee_jee_vitaliy"
+       MYSQL_ROOT_PASSWORD: "root"
+       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
