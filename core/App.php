@@ -50,7 +50,7 @@ class App
     public static function run($requestUri, $post, $get, $files) {
         \Core\Session::start();
         $request = new Request($requestUri, $post, $get, $files);
-        $route_config = require '../app/routes.php';
+        $route_config = require __DIR__ . '/../app/routes.php';
 
         try {
             $router = new Router($route_config, $request);
